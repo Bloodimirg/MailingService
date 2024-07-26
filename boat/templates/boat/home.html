@@ -1,0 +1,18 @@
+{% extends "boat/base.html" %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h2>Добро пожаловать в сервис рассылок</h2>
+      <p>Выберите действие:</p>
+      <ul>
+        <li><a href="{% url 'boat:client-list' %}">Просмотр клиентов</a></li>
+        <li><a href="{% url 'boat:mailing-list' %}">Просмотр рассылок</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
