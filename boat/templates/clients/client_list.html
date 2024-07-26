@@ -1,0 +1,11 @@
+{% extends "boat/base.html" %}
+
+{% block content %}
+  <h1>Клиенты</h1>
+  <ul>
+    {% for client in object_list %}
+      <li><a href="{% url 'boat:client-detail' client.pk %}">{{ client.full_name }}</a></li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'boat:client-create' %}">Добавить клиента</a>
+{% endblock %}

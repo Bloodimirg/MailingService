@@ -1,0 +1,9 @@
+{% extends "boat/base.html" %}
+
+{% block content %}
+  <h1>{{ object.full_name }}</h1>
+  <p>Email: {{ object.email }}</p>
+  <p>Comment: {{ object.comment }}</p>
+  <a href="{% url 'boat:client-update' object.pk %}">Edit</a> |
+  <a href="{% url 'boat:client-delete' object.pk %}">Delete</a>
+{% endblock %}

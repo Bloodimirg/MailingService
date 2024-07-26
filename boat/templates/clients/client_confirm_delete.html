@@ -1,0 +1,11 @@
+{% extends "boat/base.html" %}
+
+{% block content %}
+  <h1>Удаление клиента</h1>
+  <p>Уверены что хотите удалить клиента "{{ object.full_name }}"?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit">Подтвердить</button>
+  </form>
+  <a href="{% url 'boat:client-detail' object.pk %}">Отмена</a>
+{% endblock %}
