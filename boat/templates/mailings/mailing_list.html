@@ -1,0 +1,11 @@
+{% extends "boat/base.html" %}
+
+{% block content %}
+  <h1>Рассылки</h1>
+  <ul>
+    {% for mailing in object_list %}
+      <li><a href="{% url 'boat:mailing-detail' mailing.pk %}">Рассылка {{ message.subject }} - {{ mailing.status }}</a></li>
+    {% endfor %}
+  </ul>
+  <a href="{% url 'boat:mailing-create' %}">Создать рассылку</a>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "boat/base.html" %}
+
+{% block content %}
+  <h1>Рассылки {{ object.id }}</h1>
+  <p>Дата и время первой отправки: {{ object.first_send_time }}</p>
+  <p>Переодичность: {{ object.get_periodicity_display }}</p>
+  <p>Статус: {{ object.get_status_display }}</p>
+  <p>Сообщение: {{ object.message.subject }}</p>
+  <p>Клиент: {{ object.full_name }}</p>
+  <a href="{% url 'boat:mailing-update' object.pk %}">Изименить</a> |
+  <a href="{% url 'boat:mailing-delete' object.pk %}">Удалить</a>
+{% endblock %}
