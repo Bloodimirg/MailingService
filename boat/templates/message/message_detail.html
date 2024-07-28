@@ -1,0 +1,18 @@
+{% extends "boat/base.html" %}
+
+{% block content %}
+  <div class="card mb-4">
+    <div class="card-header">
+      <h2>Письмо №{{ object.id }}</h2>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Тема: {{ object.subject }}</h5>
+      <p class="card-text">Сообщение: {{ object.body }}</p>
+    </div>
+    <div class="card-footer text-end">
+      <a href="{% url 'boat:message-update' object.pk %}" class="btn btn-lg btn-outline-primary me-2">Изменить</a>
+      <a href="{% url 'boat:message-delete' object.pk %}" class="btn btn-lg btn-outline-danger">Удалить</a>
+    </div>
+  </div>
+{% endblock %}
+
