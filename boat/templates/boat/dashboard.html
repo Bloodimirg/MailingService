@@ -1,0 +1,52 @@
+{% extends "boat/base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Рассылки и письма</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5">Рассылки</h2>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        {% for mailing in mailings %}
+                            <li class="list-group-item">
+                                <a href="{% url 'boat:mailing-detail' mailing.pk %}">
+                                    Рассылка #{{ mailing.id }} - {{ mailing.message.subject }} - {{ mailing.get_status_display }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-outline-primary w-100" href="{% url 'boat:mailing-create' %}">Создать рассылку</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h2 class="h5">Письма</h2>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                        {% for message in message %}
+                            <li class="list-group-item">
+                                <a href="{% url 'boat:message-detail' message.pk %}">
+                                    Письмо #{{ message.pk }} - {{ message.subject }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="card-footer">
+                    <a class="btn btn-outline-primary w-100" href="{% url 'boat:message-create' %}">Составить письмо</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
