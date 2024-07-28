@@ -1,9 +1,23 @@
 {% extends "boat/base.html" %}
 
 {% block content %}
-  <h1>{{ object.full_name }}</h1>
-  <p>Email: {{ object.email }}</p>
-  <p>Comment: {{ object.comment }}</p>
-  <a href="{% url 'boat:client-update' object.pk %}">Edit</a> |
-  <a href="{% url 'boat:client-delete' object.pk %}">Delete</a>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h1 class="h5 mb-0">{{ object.full_name }}</h1>
+                </div>
+                <div class="card-body">
+                    <p><strong>Email:</strong> {{ object.email }}</p>
+                    <p><strong>Комментарий:</strong> {{ object.comment }}</p>
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'boat:client-update' object.pk %}" class="btn btn-outline-primary">Изменить</a>
+                        <a href="{% url 'boat:client-delete' object.pk %}" class="btn btn-outline-danger">Удалить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

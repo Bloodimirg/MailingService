@@ -1,11 +1,17 @@
 {% extends "boat/base.html" %}
 
 {% block content %}
-  <h1>Удалить рассылку</h1>
-  <p>Уверены что хотите удалить {{ object.id }}?</p>
-  <form method="post">
-    {% csrf_token %}
-    <button type="submit">Подтвердить</button>
-  </form>
-  <a href="{% url 'boat:mailing-detail' object.pk %}">Cancel</a>
+<div class="container mt-4">
+    <h1 class="mb-4">Удалить рассылку</h1>
+    <div class="card">
+        <div class="card-body">
+            <p>Уверены что хотите удалить рассылку №{{ object.id }}?</p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-lg btn-outline-danger">Подтвердить</button>
+                <a href="{% url 'boat:mailing-detail' object.pk %}" class="btn btn-lg btn-outline-secondary ms-2">Отмена</a>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

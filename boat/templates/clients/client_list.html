@@ -1,11 +1,28 @@
 {% extends "boat/base.html" %}
 
 {% block content %}
-  <h1>Клиенты</h1>
-  <ul>
-    {% for client in object_list %}
-      <li><a href="{% url 'boat:client-detail' client.pk %}">{{ client.full_name }}</a></li>
-    {% endfor %}
-  </ul>
-  <a href="{% url 'boat:client-create' %}">Добавить клиента</a>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h2 class="h5">Клиенты</h2>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            {% for client in object_list %}
+              <li class="list-group-item">
+                <a href="{% url 'boat:client-detail' client.pk %}">{{ client.full_name }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="card-footer">
+          <a href="{% url 'boat:client-create' %}" class="btn btn-lg btn-outline-primary">Добавить клиента</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
+
