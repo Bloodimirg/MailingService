@@ -34,8 +34,22 @@ class HomePageView(TemplateView):
 
 # ------------------------------------------------------------- CBV для клиентов
 class ClientListView(ListView):
+    """Страница списка клиентов"""
     model = Client
     template_name = 'clients/client_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.request.user
+
+        # Проверяем права доступа пользователя
+        if user.has_perm('boat.can_view_mailings'):
+            clients = Client.objects.all()
+        else:
+            clients = Client.objects.filter(user=user)
+
+        context['clients'] = clients
+        return context
 
 
 class ClientDetailView(DetailView):
