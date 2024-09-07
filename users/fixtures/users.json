@@ -1,0 +1,90 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$XnssOLSMRyy2b8S5oRVlC3$SUSr9+Wb5ufH3FyNlGV6RpSSK/nMygMv7Gk3Z9vs3uA=",
+      "last_login": "2024-09-07T09:10:20.027Z",
+      "is_superuser": true,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-09-03T20:02:22Z",
+      "email": "admin@mail.ru",
+      "phone": null,
+      "avatar": "",
+      "country": null,
+      "token": null,
+      "groups": [
+        2
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$D3vUSSy2dFimjC6rr3Esh1$wd5Ir1PInypzFdPZOj17cDfFDfSmoNPMO46ulzRxVrU=",
+      "last_login": "2024-09-07T09:38:11.396Z",
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-09-03T20:05:21Z",
+      "email": "moderator@mail.ru",
+      "phone": null,
+      "avatar": "",
+      "country": null,
+      "token": null,
+      "groups": [
+        1
+      ],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$nPFWuk84gOUO2KFq6KKpgx$uqmOMU4SkxrZLpDLkXLAN1D46Wedt/gBePGLS+UN9aI=",
+      "last_login": "2024-09-07T08:32:32.573Z",
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-09-03T20:05:35.991Z",
+      "email": "user@mail.ru",
+      "phone": null,
+      "avatar": "",
+      "country": null,
+      "token": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$aNJWgSr3lyoUVjOKXSlfjt$oA0awQ0njFTiuvk4Ux0efXa1lKiOEajubL47Lfv1V1k=",
+      "last_login": "2024-09-07T09:18:11.759Z",
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-09-06T20:33:02.201Z",
+      "email": "user2@mail.ru",
+      "phone": null,
+      "avatar": "",
+      "country": null,
+      "token": null,
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]
