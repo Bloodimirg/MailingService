@@ -4,15 +4,29 @@
 
 {% block content %}
 <div class="container mt-4">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card">
+  <div class="row">
+    <!-- Карточка "Статистика рассылок" (слева) -->
+    <div class="col-md-6 mb-4">
+      <div class="card h-100">
+        <div class="card-header">
+          <h3>Статистика рассылок</h3>
+        </div>
+        <div class="card-body">
+          <p>Количество рассылок всего: <strong>{{ total_mailings }}</strong></p>
+          <p>Количество активных рассылок: <strong>{{ active_mailings }}</strong></p>
+          <p>Количество клиентов сервиса: <strong>{{ unique_clients }}</strong></p>
+        </div>
+      </div>
+    </div>
+<div class="col-md-6 mb-4">
+      <div class="card h-100">
         <div class="card-header">
           <h2>Добро пожаловать в сервис рассылок</h2>
         </div>
         <div class="card-body">
+          {% if user.is_authenticated %}
           <p>Выберите действие:</p>
-          <ul class="list-group list-group-flush">
+          <ul class="list-group list-group-flush mb-3">
             <li class="list-group-item">
               <a href="{% url 'boat:client-list' %}" class="btn btn-outline-primary w-100">Просмотр клиентов</a>
             </li>
@@ -20,6 +34,38 @@
               <a href="{% url 'boat:dashboard' %}" class="btn btn-outline-primary w-100">Просмотр рассылок</a>
             </li>
           </ul>
+          {% else %}
+          <h4>Зарегистрируйтесь, чтобы продолжить</h4>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h3>Рекомендуемые статьи</h3>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            {% for blog in random_blogs %}
+            <div class="col-md-4 mb-3">
+              <div class="card h-100">
+                {% if blog.image %}
+                <img src="{{ blog.image.url }}" class="card-img-top" style="height: 150px; object-fit: cover;">
+                {% else %}
+                <img src="/media/images/photo/no_photo.jpg" class="card-img-top" style="height: 150px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                  <h5 class="card-title">{{ blog.title }}</h5>
+                  <p class="card-text">{{ blog.body|slice:":50" }}...</p>
+                  <a href="{% url 'boat:blog-detail' blog.pk %}" class="btn btn-sm btn-primary">Читать далее</a>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
         </div>
       </div>
     </div>
