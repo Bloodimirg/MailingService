@@ -11,13 +11,21 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
-                        {% for mailing in mailings %}
-                            <li class="list-group-item">
-                                <a href="{% url 'boat:mailing-detail' mailing.pk %}">
-                                    Рассылка #{{ mailing.id }} - {{ mailing.message.subject }} - {{ mailing.get_status_display }}
-                                </a>
-                            </li>
+
+                        {% for mailing in mailing %}
+                        <li class="list-group-item">
+                            <a href="{% url 'boat:mailing-detail' mailing.pk %}">
+                                # {{ forloop.counter }} || {{ mailing.user }} || {{ mailing.get_status_display }}
+                            </a>
+                            {% if perms.boat.can_disable_mailings %}
+                            <form action="{% url 'boat:mailing-disable' mailing.pk %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">Отключить</button>
+                            </form>
+                            {% endif %}
+                        </li>
                         {% endfor %}
+
                     </ul>
                 </div>
                 <div class="card-footer">
@@ -32,12 +40,12 @@
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
-                        {% for message in message %}
-                            <li class="list-group-item">
-                                <a href="{% url 'boat:message-detail' message.pk %}">
-                                    Письмо #{{ message.pk }} - {{ message.subject }}
-                                </a>
-                            </li>
+                        {% for message in messages %}
+                        <li class="list-group-item">
+                            <a href="{% url 'boat:message-detail' message.pk %}">
+                                #{{ forloop.counter }} || {{ message.subject }}  || {{ message.user}}
+                            </a>
+                        </li>
                         {% endfor %}
                     </ul>
                 </div>
