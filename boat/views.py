@@ -85,10 +85,11 @@ class ClientDeleteView(DeleteView):
     template_name = 'clients/client_confirm_delete.html'
     success_url = reverse_lazy('boat:client-list')
 
-    # CBV для рассылок
 
+# ---------------------------------------------------------- CBV для рассылок
 
 class MailingDetailView(DetailView):
+    """Информация об одной рассылке"""
     model = Mailing
     template_name = 'mailings/mailing_detail.html'
 
