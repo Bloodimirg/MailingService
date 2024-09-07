@@ -1,0 +1,24 @@
+{% extends 'boat/base.html' %}
+{% block content %}
+<div class="col-12">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <div class="col rounded mx-auto d-block border border-0">
+            <div class="card shadow-sm">
+                {% if materials.image %}
+                <img src="/media/{{ boat.image }}" style="height: 400px; object-fit: cover;"/>
+                {% else %}
+                <img src="/media/images/photo/no_photo.jpg" style="height: 400px; object-fit: cover;"/>
+                {% endif %}
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <p>Хотите удалить "{{object.title }}" ?</p>
+                    <button type="submit" class="btn btn-danger">Подтвердить</button>
+                    <a href="{% url 'boat:blog-list' %}" class="btn btn_warnin">Отмена</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
