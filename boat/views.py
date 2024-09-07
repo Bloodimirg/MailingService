@@ -95,10 +95,28 @@ class MailingDetailView(DetailView):
 
 
 class MailingCreateView(CreateView):
+    """Создание рассылки с фильтрацией"""
     model = Mailing
-    fields = ['first_send_time', 'periodicity', 'status', 'message', 'clients']
+    form_class = MailingForm
     template_name = 'mailings/mailing_form.html'
     success_url = reverse_lazy('boat:dashboard')
+
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+
+        # Фильтруем клиентов: показываем клиентов текущего пользователя
+        form.fields['clients'].queryset = Client.objects.filter(
+            user=self.request.user
+        )
+        # Фильтруем сообщения: показываем только сообщения текущего пользователя
+        form.fields['message'].queryset = Message.objects.filter(
+            user=self.request.user
+        )
+        return form
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class MailingUpdateView(UpdateView):
