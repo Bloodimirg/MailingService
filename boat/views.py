@@ -72,8 +72,9 @@ class ClientCreateView(CreateView):
 
 
 class ClientUpdateView(UpdateView):
+    """Редактирование клиента"""
     model = Client
-    fields = ['email', 'full_name', 'comment']
+    form_class = ClientForm
     template_name = 'clients/client_form.html'
     success_url = reverse_lazy('boat:client-list')
 
