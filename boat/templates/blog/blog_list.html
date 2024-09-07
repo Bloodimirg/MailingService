@@ -1,0 +1,114 @@
+{% extends 'boat/base.html' %}
+{% load my_tags %}
+{% load custom_tags %}
+{% block content %}
+
+
+<div class="container">
+    {% if user.is_authenticated and perms.users.can_block_users and perms.users.can_view_users %}
+    <div class="d-flex justify-content-center my-3 ">
+        <a class="btn btn-outline-primary rounded" href="{% url 'boat:blog-create' %}"
+           style="max-width: 200px;">Добавить пост</a>
+    </div>
+    {% endif %}
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for blog in object_list %}
+        <div class="col">
+            <div class="card shadow-sm card-fixed-height">
+                {% if blog.image %}
+                <img src="{{ blog.image | media_filter }}" class="card-img-top" style="height: 400px; object-fit: cover;">
+                {% else %}
+                <img src="/media/images/photo/no_photo.jpg" class="card-img-top" style="height: 400px; object-fit: cover;">
+                {% endif %}
+                <div class="card-body">
+                    <p class="card-textbody-secondary fs-3">{{ blog.title }}</p>
+                    <p class="card-text">{{ blog.body | slice:":100" }}</p>
+                    <p class="card-textbody-secondary fs-6">Создано: {{ blog.created_at }}</p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            {% if user.is_authenticated %}
+                            <a class="btn btn-sm btn-outline-primary" href="{% url 'boat:blog-detail' blog.pk %}" role="button">Посмотреть</a>
+
+                            {% if perms.users.can_block_users and perms.users.can_view_users %}
+                            <a class="btn btn-sm btn-outline-primary" href="{% url 'boat:blog-update' blog.pk %}" role="button">Изменить</a>
+                            <a class="btn btn-sm btn-outline-primary" href="{% url 'boat:blog-delete' blog.pk %}" role="button">Удалить</a>
+                            {% endif %}
+                            {% endif %}
+
+                        </div>
+
+                    </div>
+                    <small class="text-muted">Просмотры: {{ blog.views_count }}</small>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+    <nav aria-label="Page navigation" class="mt-4">
+            <ul class="pagination justify-content-center">
+<!--     Есть ли предыдущая страница в пагинаторе-->
+                {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page=1" aria-label="First">
+                        <span aria-hidden="true">&laquo;&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <span class="page-link">&laquo;&laquo;</span>
+                </li>
+                <li class="page-item disabled">
+                    <span class="page-link">&laquo;</span>
+                </li>
+                {% endif %}
+
+<!--          Цикл Django DTL, который перебирает все номера страниц, доступные в пагинаторе.-->
+                {% for num in page_obj.paginator.page_range %}
+
+<!--          Условие, проверяющее, является ли текущий номер страницы активным. Если да, то добавляется класс active.-->
+                {% if page_obj.number == num %}
+                <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+
+<!--          Должны ли быть показаны ссылки на соседние страницы вокруг текущей. Используется функция add для вычисления диапазона чисел-->
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+                {% endif %}
+                {% endfor %}
+
+<!--          Проверка на наличие следующей страницы-->
+                {% if page_obj.has_next %}
+
+<!--          Создание элемента списка для ссылки на следующую страницу-->
+                <li class="page-item">
+
+<!--          Ссылка на следующую страницу с динамическим значением page в URL-->
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last">
+                        <span aria-hidden="true">&raquo;&raquo;</span>
+                    </a>
+                </li>
+<!--          Блок кода, выполняемый, если следующей страницы нет-->
+                {% else %}
+<!--          Элемент списка с классом disabled, отображаемый как неактивный-->
+                <li class="page-item disabled">
+                    <span class="page-link">&raquo;</span>
+                </li>
+                <li class="page-item disabled">
+                    <span class="page-link">&raquo;&raquo;</span>
+                </li>
+                {% endif %}
+            </ul>
+        </nav>
+</div>
+{% endblock %}
