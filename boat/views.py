@@ -59,10 +59,16 @@ class ClientDetailView(DetailView):
 
 
 class ClientCreateView(CreateView):
+    """Создание клиента"""
     model = Client
-    fields = ['email', 'full_name', 'comment']
+    form_class = ClientForm
     template_name = 'clients/client_form.html'
     success_url = reverse_lazy('boat:client-list')
+
+    # привязываем клиента к пользователю
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class ClientUpdateView(UpdateView):
