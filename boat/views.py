@@ -1,14 +1,38 @@
-from django.urls import reverse_lazy
+from django.contrib.auth.mixins import PermissionRequiredMixin
+
+from django.shortcuts import get_object_or_404, redirect
+from django.urls import reverse_lazy, reverse
+from django.views import View
 
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
-from .models import Client, Mailing, Message
+
+from boat.forms import MailingForm, MessageForm, ClientForm, BlogForm
+from boat.models import Client, Mailing, Message, Blog
 
 
 class HomePageView(TemplateView):
+    """Главная страница"""
     template_name = 'boat/home.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
 
-# CBV для клиентов
+        # Подсчет общего количества рассылок
+        context['total_mailings'] = Mailing.objects.count()
+
+        # Подсчет активных рассылок (например, статус "active", измените под ваши условия)
+        context['active_mailings'] = Mailing.objects.filter(status__in=['created', 'started']).count()
+
+        # Подсчет количества уникальных клиентов
+        context['unique_clients'] = Client.objects.distinct().count()
+
+        # Получение трех случайных статей из блога
+        context['random_blogs'] = Blog.objects.order_by('?')[:3]
+
+        return context
+
+
+# ------------------------------------------------------------- CBV для клиентов
 class ClientListView(ListView):
     model = Client
     template_name = 'clients/client_list.html'
