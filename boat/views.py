@@ -219,3 +219,53 @@ class DashboardView(TemplateView):
         context['mailing'] = mailings
         context['messages'] = messages
         return context
+
+
+# ---------------------------------------------------------CBV для блога
+
+class BlogCreateView(CreateView):
+    """Контроллер для добавления постов"""
+    model = Blog
+    form_class = BlogForm
+    template_name = 'blog/blog_form.html'
+    success_url = reverse_lazy('boat:blog-list')
+
+
+class BlogListView(ListView):
+    """Контроллер для просмотра постов"""
+    model = Blog
+    template_name = 'blog/blog_list.html'
+    paginate_by = 3
+
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        self.object.views_count += 1
+        self.object.save()
+        return self.object
+
+
+class BlogUpdateView(UpdateView):
+    """Контроллер для изменения постов"""
+    model = Blog
+    form_class = BlogForm
+    template_name = 'blog/blog_form.html'
+    success_url = reverse_lazy('boat:blog-list')
+
+
+class BlogDeleteView(DeleteView):
+    """Контроллер для удаления постов"""
+    model = Blog
+    template_name = 'blog/blog_confirm_delete.html'
+    success_url = reverse_lazy('boat:blog-list')
+
+
+class BlogDetailView(DetailView):
+    """Контроллер для просмотра одного поста"""
+    model = Blog
+    template_name = 'blog/blog_detail.html'
+
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        self.object.views_count += 1
+        self.object.save()
+        return self.object
