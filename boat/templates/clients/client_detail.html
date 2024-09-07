@@ -12,8 +12,10 @@
                     <p><strong>Email:</strong> {{ object.email }}</p>
                     <p><strong>Комментарий:</strong> {{ object.comment }}</p>
                     <div class="d-flex justify-content-between">
+                        {% if object.user == request.user or user.is_superuser %}
                         <a href="{% url 'boat:client-update' object.pk %}" class="btn btn-outline-primary">Изменить</a>
                         <a href="{% url 'boat:client-delete' object.pk %}" class="btn btn-outline-danger">Удалить</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
