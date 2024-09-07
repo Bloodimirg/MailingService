@@ -80,6 +80,7 @@ class ClientUpdateView(UpdateView):
 
 
 class ClientDeleteView(DeleteView):
+    """Удаление клиента"""
     model = Client
     template_name = 'clients/client_confirm_delete.html'
     success_url = reverse_lazy('boat:client-list')
