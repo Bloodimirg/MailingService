@@ -10,8 +10,10 @@
       <p class="card-text">Сообщение: {{ object.body }}</p>
     </div>
     <div class="card-footer text-end">
+      {% if object.user == request.user or user.is_superuser %}
       <a href="{% url 'boat:message-update' object.pk %}" class="btn btn-lg btn-outline-primary me-2">Изменить</a>
       <a href="{% url 'boat:message-delete' object.pk %}" class="btn btn-lg btn-outline-danger">Удалить</a>
+      {% endif %}
     </div>
   </div>
 {% endblock %}
