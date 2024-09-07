@@ -157,8 +157,18 @@ class MailingDeleteView(DeleteView):
     template_name = 'mailings/mailing_confirm_delete.html'
     success_url = reverse_lazy('boat:dashboard')
 
-    # CBV для писем
 
+class MailingDisableView(PermissionRequiredMixin, View):
+    """Отключение рассылки"""
+    permission_required = 'boat.can_disable_mailings'
+    raise_exception = True
+
+    @staticmethod
+    def post(**kwargs):
+        mailing = get_object_or_404(Mailing, pk=kwargs.get('pk'))
+        mailing.status = Mailing.DISABLE  # Или другой статус, соответствующий отключению
+        mailing.save()
+        return redirect('boat:dashboard')
 
 class MessageDetailView(DetailView):
     model = Message
