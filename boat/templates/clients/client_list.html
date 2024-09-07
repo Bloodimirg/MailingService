@@ -10,9 +10,10 @@
         </div>
         <div class="card-body">
           <ul class="list-group list-group-flush">
-            {% for client in object_list %}
+            {% for client in clients %}
               <li class="list-group-item">
-                <a href="{% url 'boat:client-detail' client.pk %}">{{ client.full_name }}</a>
+                <a href="{% url 'boat:client-detail' client.pk %}">Клиент:  {{ client.full_name }}</a>
+                <p>Пользователь {{client.user}}</p>
               </li>
             {% endfor %}
           </ul>
