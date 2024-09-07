@@ -1,0 +1,236 @@
+[
+  {
+    "model": "boat.blog",
+    "pk": 18,
+    "fields": {
+      "title": "Codon",
+      "body": "высокопроизводительный компилятор Python, который компилирует код Python в нативный машинный код без каких-либо накладных расходов во время выполнения",
+      "image": "boat/photo/post1.jpg",
+      "created_at": "2024-09-07T06:22:01.179Z",
+      "views_count": 3,
+      "user": null
+    }
+  },
+  {
+    "model": "boat.blog",
+    "pk": 19,
+    "fields": {
+      "title": "Removal",
+      "body": "Это невероятно быстрый валидатор электронной почты на Python, написанный на Rust и предлагающий повышение производительности в 100-1000 раз.",
+      "image": "boat/photo/post2.jpg",
+      "created_at": "2024-09-07T06:24:15.683Z",
+      "views_count": 3,
+      "user": null
+    }
+  },
+  {
+    "model": "boat.blog",
+    "pk": 20,
+    "fields": {
+      "title": "Kubernetes",
+      "body": "Стратегии масштабирования Kubernetes: на заметку разработчику и DevOps-инженеру.",
+      "image": "boat/photo/post3.jpg",
+      "created_at": "2024-09-07T06:27:58.594Z",
+      "views_count": 5,
+      "user": null
+    }
+  },
+  {
+    "model": "boat.blog",
+    "pk": 21,
+    "fields": {
+      "title": "Kafka",
+      "body": "Ключевые понятия, составляющие и юзкейсы Kafka: на заметку разработчику.",
+      "image": "boat/photo/post4.jpg",
+      "created_at": "2024-09-07T06:43:45.536Z",
+      "views_count": 5,
+      "user": null
+    }
+  },
+  {
+    "model": "boat.blog",
+    "pk": 22,
+    "fields": {
+      "title": "Собеседования",
+      "body": "Коллекция ресурсов для успешного прохождения следующего технического собеседования.",
+      "image": "boat/photo/post5.jpg",
+      "created_at": "2024-09-07T06:46:06.631Z",
+      "views_count": 2,
+      "user": null
+    }
+  },
+  {
+    "model": "boat.blog",
+    "pk": 23,
+    "fields": {
+      "title": "Герои 3",
+      "body": "Настоящие «Герои 3»: разработчики сдержали слово — их новая игра действительно дышит духом лучшей части серии.",
+      "image": "boat/photo/post6.jpg",
+      "created_at": "2024-09-07T06:52:31.436Z",
+      "views_count": 10,
+      "user": null
+    }
+  },
+  {
+    "model": "boat.client",
+    "pk": 3,
+    "fields": {
+      "email": "shnurov@mail.ru",
+      "full_name": "Гипотенузов Шнур Иванович",
+      "comment": "",
+      "user": 3
+    }
+  },
+  {
+    "model": "boat.client",
+    "pk": 4,
+    "fields": {
+      "email": "petrovich@list.ru",
+      "full_name": "Петр Зигмундович",
+      "comment": "",
+      "user": 2
+    }
+  },
+  {
+    "model": "boat.client",
+    "pk": 5,
+    "fields": {
+      "email": "admin@mail.ru",
+      "full_name": "Админ Админович",
+      "comment": "",
+      "user": 1
+    }
+  },
+  {
+    "model": "boat.client",
+    "pk": 6,
+    "fields": {
+      "email": "user2@mail.ru",
+      "full_name": "Клиент Клиентович",
+      "comment": "",
+      "user": 4
+    }
+  },
+  {
+    "model": "boat.message",
+    "pk": 11,
+    "fields": {
+      "subject": "user",
+      "body": "hello",
+      "user": 3
+    }
+  },
+  {
+    "model": "boat.message",
+    "pk": 12,
+    "fields": {
+      "subject": "moderator",
+      "body": "moder",
+      "user": 2
+    }
+  },
+  {
+    "model": "boat.message",
+    "pk": 13,
+    "fields": {
+      "subject": "admin",
+      "body": "admin",
+      "user": 1
+    }
+  },
+  {
+    "model": "boat.message",
+    "pk": 14,
+    "fields": {
+      "subject": "user2",
+      "body": "user2",
+      "user": 4
+    }
+  },
+  {
+    "model": "boat.mailing",
+    "pk": 9,
+    "fields": {
+      "first_send_time": "2024-08-30T15:20:00Z",
+      "periodicity": "daily",
+      "status": "completed",
+      "message": 11,
+      "user": 3,
+      "clients": [
+        3
+      ]
+    }
+  },
+  {
+    "model": "boat.mailing",
+    "pk": 10,
+    "fields": {
+      "first_send_time": "2024-08-30T15:25:00Z",
+      "periodicity": "daily",
+      "status": "completed",
+      "message": 12,
+      "user": 2,
+      "clients": [
+        4
+      ]
+    }
+  },
+  {
+    "model": "boat.mailing",
+    "pk": 11,
+    "fields": {
+      "first_send_time": "2024-08-30T15:20:00Z",
+      "periodicity": "daily",
+      "status": "completed",
+      "message": 13,
+      "user": 1,
+      "clients": [
+        5
+      ]
+    }
+  },
+  {
+    "model": "boat.mailing",
+    "pk": 12,
+    "fields": {
+      "first_send_time": "2024-08-30T15:25:00Z",
+      "periodicity": "daily",
+      "status": "disable",
+      "message": 14,
+      "user": 4,
+      "clients": [
+        6
+      ]
+    }
+  },
+  {
+    "model": "boat.mailingattempt",
+    "pk": 2,
+    "fields": {
+      "mailing": 11,
+      "attempt_time": "2024-09-07T08:42:02.296Z",
+      "status": true,
+      "server_response": "Email sent successfully"
+    }
+  },
+  {
+    "model": "boat.mailingattempt",
+    "pk": 3,
+    "fields": {
+      "mailing": 11,
+      "attempt_time": "2024-09-07T09:03:02.516Z",
+      "status": true,
+      "server_response": "Email sent successfully"
+    }
+  },
+  {
+    "model": "boat.mailingattempt",
+    "pk": 4,
+    "fields": {
+      "mailing": 11,
+      "attempt_time": "2024-09-07T09:05:03.167Z",
+      "status": true,
+      "server_response": "Email sent successfully"
+    }
+  }
+]
