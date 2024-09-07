@@ -190,7 +190,7 @@ class MessageCreateView(CreateView):
 
 class MessageUpdateView(UpdateView):
     model = Message
-    fields = ['subject', 'body']
+    form_class = MessageForm
     template_name = 'message/message_form.html'
     success_url = reverse_lazy('boat:dashboard')
 
@@ -206,6 +206,16 @@ class DashboardView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['mailings'] = Mailing.objects.all()
-        context['message'] = Message.objects.all()
+        user = self.request.user
+
+        # Проверяем права доступа пользователя
+        if user.has_perm('boat.can_view_mailings'):
+            mailings = Mailing.objects.all()
+            messages = Message.objects.all()
+        else:
+            mailings = Mailing.objects.filter(user=user)
+            messages = Message.objects.filter(user=user)
+
+        context['mailing'] = mailings
+        context['messages'] = messages
         return context
