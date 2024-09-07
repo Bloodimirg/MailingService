@@ -1,0 +1,43 @@
+{% extends "boat/base.html" %}
+{% load custom_tags %}
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h2 class="h5">Пользователи и администраторы</h2>
+            </div>
+            <div class="card-body">
+                <ul class="list-group list-group-flush">
+
+                    {% for user in users %}
+                    <li class="list-group-item">
+                            <a href="{% url 'users:users-list' %}">
+                                {{ forloop.counter }} | {{ user.email }}
+                            </a>
+
+                      {% if request.user.is_superuser or user|is_moderator %}
+                            {% if perms.users.can_block_users %}
+                            <form action="{% url 'users:users-disable' user.pk %}" method="post" class="d-inline">
+                                {% csrf_token %}
+                                {% if user.is_active == True %}
+
+                                <button type="submit" class="btn btn-danger btn-sm">Заблокировать</button>
+                              {% else %}
+                              <button type="submit" class="btn btn-success btn-sm">Разблокировать</button>
+                              {% endif %}
+
+                            </form>
+                            {% endif %}
+                      {% endif %}
+
+                        </li>
+                        {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
