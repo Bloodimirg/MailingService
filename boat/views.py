@@ -120,10 +120,36 @@ class MailingCreateView(CreateView):
 
 
 class MailingUpdateView(UpdateView):
+    """Редактирование рассылки"""
     model = Mailing
-    fields = ['first_send_time', 'periodicity', 'status', 'message', 'clients']
+    form_class = MailingForm
     template_name = 'mailings/mailing_form.html'
-    success_url = reverse_lazy('boat:dashboard')
+
+    def get_success_url(self):
+        return reverse('boat:mailing-detail', args=[self.object.pk])
+
+    # Фильтрация полей изменения рассылки по пользователям
+    def get_form(self, form_class=None):
+        form = super().get_form(form_class)
+
+        # если user админ = может видеть в форме редактирования всех клиентов и сообщения
+        if self.request.user.is_superuser:
+            form.fields['clients'].queryset = Client.objects.all()
+            form.fields['message'].queryset = Message.objects.all()
+            return form
+        # иначе Фильтруем клиентов и сообщения только текущего пользователя
+        else:
+            form.fields['clients'].queryset = Client.objects.filter(
+                user=self.request.user
+            )
+            form.fields['message'].queryset = Message.objects.filter(
+                user=self.request.user
+            )
+            return form
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class MailingDeleteView(DeleteView):
