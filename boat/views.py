@@ -53,6 +53,7 @@ class ClientListView(ListView):
 
 
 class ClientDetailView(DetailView):
+    """Информация об одном клиенте"""
     model = Client
     template_name = 'clients/client_detail.html'
 
