@@ -170,6 +170,8 @@ class MailingDisableView(PermissionRequiredMixin, View):
         mailing.save()
         return redirect('boat:dashboard')
 
+
+# ---------------------------------------------------------- CBV для писем
 class MessageDetailView(DetailView):
     model = Message
     template_name = 'message/message_detail.html'
@@ -177,9 +179,13 @@ class MessageDetailView(DetailView):
 
 class MessageCreateView(CreateView):
     model = Message
-    fields = ['subject', 'body']
+    form_class = MessageForm
     template_name = 'message/message_form.html'
     success_url = reverse_lazy('boat:dashboard')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class MessageUpdateView(UpdateView):
