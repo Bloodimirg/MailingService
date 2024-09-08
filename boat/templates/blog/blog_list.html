@@ -3,7 +3,6 @@
 {% load custom_tags %}
 {% block content %}
 
-
 <div class="container">
     {% if user.is_authenticated and perms.users.can_block_users and perms.users.can_view_users %}
     <div class="d-flex justify-content-center my-3 ">
@@ -110,5 +109,5 @@
                 {% endif %}
             </ul>
         </nav>
-</div>
+
 {% endblock %}
