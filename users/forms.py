@@ -10,7 +10,7 @@ class UserRegisterForm(StyleFormMixin, UserCreationForm):
         model = User
         fields = ("email", "password1", "password2", "avatar", "phone", "country")
 
-class PasswordResetForm(forms.Form):
+class PasswordResetForm(StyleFormMixin, forms.Form):
     """Форма сброса пароля"""
     email = forms.EmailField(label="Email", max_length=254, widget=forms.EmailInput(
         attrs={'class': 'form-control', 'placeholder': 'Введите ваш email'}))
