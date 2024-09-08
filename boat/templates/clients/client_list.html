@@ -6,7 +6,7 @@
     <div class="col-md-6 offset-md-3">
       <div class="card mb-4">
         <div class="card-header">
-          <h2 class="h5">Клиенты</h2>
+          <h2 class="h5 text-center">Клиенты</h2>
         </div>
         <div class="card-body">
           <ul class="list-group list-group-flush">
@@ -18,8 +18,8 @@
             {% endfor %}
           </ul>
         </div>
-        <div class="card-footer">
-          <a href="{% url 'boat:client-create' %}" class="btn btn-lg btn-outline-primary">Добавить клиента</a>
+        <div class="btn">
+          <a href="{% url 'boat:client-create' %}" class="btn btn-lg btn-outline-primary ">Добавить клиента</a>
         </div>
       </div>
     </div>
