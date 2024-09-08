@@ -8,6 +8,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 
 from boat.forms import MailingForm, MessageForm, ClientForm, BlogForm
 from boat.models import Client, Mailing, Message, Blog
+from boat.services import get_posts_from_cache
 
 
 class HomePageView(TemplateView):
@@ -236,6 +237,9 @@ class BlogListView(ListView):
     model = Blog
     template_name = 'blog/blog_list.html'
     paginate_by = 3
+
+    def get_queryset(self):
+        return get_posts_from_cache()
 
     def get_object(self, queryset=None):
         self.object = super().get_object(queryset)
