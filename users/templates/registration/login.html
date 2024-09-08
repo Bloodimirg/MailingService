@@ -1,9 +1,11 @@
 {% extends 'boat/base.html' %}
 {% block content %}
-<div class="container">
+<div class="container mt-4">
     <form class="row" method="post" enctype="multipart/form-data">
-        <div class="col-6">
-            <div class="card">
+        <div class="col-md-6 offset-md-3 text-center">
+            <h5>Вход</h5>
+            <div class="card ">
+
                 <div class="card-body">
                     {% csrf_token %}
                     {{ form.as_p }}
@@ -14,8 +16,10 @@
             </div>
         </div>
     </form>
-    <form class="row mt-3" method="post" action="{% url 'users:password_reset' %}">
-        <div class="col-6">
+    <form class="row mt-3 text-center" method="post" action="{% url 'users:password_reset' %}">
+        <h5>Восстановление пароля</h5>
+        <div class="col-md-6 offset-md-3">
+
             <div class="card">
                 <div class="card-body">
                     {% csrf_token %}
